@@ -68,14 +68,14 @@ Given the neighborhood radius definitions, outlier Los Angeles neighborhoods wer
 
 ```{r, echo=F}
 
-htmltools::tags$iframe(title = "embedded map of NY", src = "./../la_map_markers_js.html",width=1000, height=800)
+htmltools::tags$iframe(title = "embedded map of LA Centroids", src = "./../la_map_markers_js.html",width=1000, height=800)
 ```
 
 ##### Map of New York City Neighborhood Centroids (outliers excluded)
 
 ```{r, echo=F}
 
-htmltools::tags$iframe(title = "embedded map of NY", src = "./../ny_map_markers_js.html",width=1000, height=800)
+htmltools::tags$iframe(title = "embedded map of NY Centroids", src = "./../ny_map_markers_js.html",width=1000, height=800)
 ```
 
 
