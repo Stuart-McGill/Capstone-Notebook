@@ -68,14 +68,14 @@ Given the neighborhood radius definitions, outlier Los Angeles neighborhoods wer
 
 ```{r, echo=F}
 
-htmltools::tags$iframe(title = "embedded map of NY", "src = la_map_markers_js.html",width=1000, height=800)
+htmltools::tags$iframe(title = "embedded map of NY", src = "./../la_map_markers_js.html",width=1000, height=800)
 ```
 
 ##### Map of New York City Neighborhood Centroids (outliers excluded)
 
 ```{r, echo=F}
 
-htmltools::tags$iframe(title = "embedded map of NY", "src = ny_map_markers_js.html",width=1000, height=800)
+htmltools::tags$iframe(title = "embedded map of NY", src = "./../ny_map_markers_js.html",width=1000, height=800)
 ```
 
 
@@ -93,7 +93,7 @@ The venue categories were converted by first splitting them into lists of single
 
 The venue vectors distance matrix was calculated using the cosine distance metric. Subsequently the vectors were clustered with Agglomerative Heirarchical Clustering and visualised with a dendrogram. The threshold of .1 was chosed, by visual inspection, below which all venues were manually inspected for semantic overlap. 55 categories were found to have some degree of overlap and were combined into 24 categories.
 
-![figure 2: Venue Category Dendrogram]("./../venue_name_dendrogram.png")
+![figure 2: Venue Category Dendrogram](./../venue_name_dendrogram.png){width=1600px, height=400px}
 
 
 
