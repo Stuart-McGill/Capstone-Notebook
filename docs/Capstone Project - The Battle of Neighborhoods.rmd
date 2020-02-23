@@ -45,8 +45,15 @@ The neighborhood proportion-venue vector, that sums to one, can be considered to
 
 #### 2.2 Getting the data
 
+
+
 ```{r, echo=F}
 
-htmltools::tags$iframe(title = "My embedded document", src = "./la_map.html", width=1000,height=900)
+htmltools::tags$iframe(title = "embedded map of NY", src = "./../la_map_df.html", width=1000,height=900)
+```
+
+```{r, echo=F}
+
+htmltools::tags$iframe(title = "embedded map of NY", src = "./../ny_map_df.html", width=1000,height=900)
 ```
 
