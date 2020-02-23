@@ -53,13 +53,13 @@ The following maps demonstrate that the neighborhoods in each city are quite dif
 
 ```{r, echo=F}
 
-htmltools::tags$iframe(title = "embedded map of LA", src = "./../la_map_df.html", width=1000,height=800)
+htmltools::tags$iframe(title = "embedded map of LA", src = "./la_map_df.html", width=1000,height=800)
 ```
 
 ##### Map of New York City Neighborhoods
 ```{r, echo=F}
 
-htmltools::tags$iframe(title = "embedded map of NY", src = "./../ny_map_df.html", width=1000,height=900)
+htmltools::tags$iframe(title = "embedded map of NY", src = "./ny_map_df.html", width=1000,height=900)
 ```
 
 Given the neighborhood radius definitions, outlier Los Angeles neighborhoods were excluded from further analysis. The map below shows the excluded neighborhoods highlighted in red with centroids placed within each neighborhood.
@@ -68,14 +68,14 @@ Given the neighborhood radius definitions, outlier Los Angeles neighborhoods wer
 
 ```{r, echo=F}
 
-htmltools::tags$iframe(title = "embedded map of LA Centroids", src = "./../la_map_markers_js.html",width=1000, height=800)
+htmltools::tags$iframe(title = "embedded map of LA Centroids", src = "./la_map_markers_js.html",width=1000, height=800)
 ```
 
 ##### Map of New York City Neighborhood Centroids (outliers excluded)
 
 ```{r, echo=F}
 
-htmltools::tags$iframe(title = "embedded map of NY Centroids", src = "./../ny_map_markers_js.html",width=1000, height=800)
+htmltools::tags$iframe(title = "embedded map of NY Centroids", src = "./ny_map_markers_js.html",width=1000, height=800)
 ```
 
 
@@ -167,7 +167,7 @@ Within the modified range, the silhouette scores indicate that 6 clusters was th
 
 ```{r, echo=F}
 
-htmltools::tags$iframe(title = "embedded map of NY", src = "./../la_map_clustered.html",width=1000, height=800)
+htmltools::tags$iframe(title = "embedded map of NY", src = "./la_map_clustered.html",width=1000, height=800)
 ```
 
 
@@ -206,7 +206,7 @@ The similarity of performance of the classifier and the clustering indicates tha
 
 ```{r, echo=F}
 
-htmltools::tags$iframe(title = "embedded map of NY", src = "./../ny_map_clustered.html",width=1000, height=800)
+htmltools::tags$iframe(title = "embedded map of NY", src = "./ny_map_clustered.html",width=1000, height=800)
 ```
 
 
