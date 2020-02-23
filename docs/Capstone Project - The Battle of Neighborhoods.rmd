@@ -45,15 +45,59 @@ The neighborhood proportion-venue vector, that sums to one, can be considered to
 
 #### 2.2 Getting the data
 
+The follwing maps demonstrate that the neighborhoods in each city are quite different. Los Angeles has much larger neighborhood areas compared to New York City, and has a quite a few very large neighborhoods. This is an important factor to consider when gathering the neighborhood facilities. Originally, it was planned to use a venue inclusion radius of 1000 metres for both cities. However,Given the difference in areas, the venue inclusion radius for Los Angeles is set to 1250 metres, whereas the inclusion radius for New York City is set to 500 metres. These values were determined with a boxplot of the neighborhood areas in each city as shown in figure 1.
 
+![figure 1: Neighborhood Areas by City](./../City_neighborhood_area_box.png)
+
+##### Map of Los Angeles Neighborhoods
 
 ```{r, echo=F}
 
-htmltools::tags$iframe(title = "embedded map of NY", src = "./../la_map_df.html", width=1000,height=900)
+htmltools::tags$iframe(title = "embedded map of LA", src = "./../la_map_df.html", width=1000,height=800)
 ```
 
+##### Map of New York City Neighborhoods
 ```{r, echo=F}
 
 htmltools::tags$iframe(title = "embedded map of NY", src = "./../ny_map_df.html", width=1000,height=900)
 ```
+
+Given the neighborhood radius definitions, outlier Los Angeles neighborhoods were excluded from further analysis. The map below shows the excluded neighborhoods highlighted in red with centroids placed within each neighborhood.
+
+##### Map of Los Angeles Neighborhood Centroids (outliers excluded)
+
+```{r, echo=F}
+
+htmltools::tags$iframe(title = "embedded map of NY", "src = la_map_markers_js.html",width=1000, height=800)
+```
+
+##### Map of New York City Neighborhood Centroids (outliers excluded)
+
+```{r, echo=F}
+
+htmltools::tags$iframe(title = "embedded map of NY", "src = ny_map_markers_js.html",width=1000, height=800)
+```
+
+
+
+
+### 3. Methodology 
+
+#### 3.1 Feature Exploration and Engineering: Clustering Venue Categories via Natural Language Processing
+
+The venue categories for all the surrounding venues, at each neighborhood in Los Angeles and New York City form the features for the clustering and classification. However, there is no guarentee that the categories are mutually exclusive. So exploration of their sematic similarity is needed to assess whether some categories need to be combined.
+
+This presents its own challenge as there are over 400 categories to compare. In order to make this comparison more managable, venue categories were converted into 100 dimensional vectors using the *word2vec* embedding trained on wikipedia data (available [here](http://wikipedia2vec.s3.amazonaws.com/models/en/2018-04-20/enwiki_20180420_100d.txt.bz2)).
+
+The venue categories were converted by first splitting them into lists of single words, then each word was converted to the vector. The vectors were summed together then divided by the total number of words in the category. This produced one 100 dimesion vector per category (venue vector). 
+
+The venue vectors distance matrix was calculated using the cosine distance metric. Subsequently the vectors were clustered with Agglomerative Heirarchical Clustering and visualised with a dendrogram. The threshold of .1 was chosed, by visual inspection, below which all venues were manually inspected for semantic overlap. 55 categories were found to have some degree of overlap and were combined into 24 categories.
+
+![figure 2: Venue Category Dendrogram]("./../venue_name_dendrogram.png")
+
+
+
+After combination there were 464 venue categories. These were one-hot-encoded and summed together for each neighborhood. This formed a multinomial vector representing each neighborhood. These neighborhood vectors were converted into simplexes (vectors whos elements sum to one) using Dirichlet flat prior (adding one to each element then dividing by the vector by the sum of each row). This meant that each simplex represented an estimate of the proportion of venue categories surrounding each neighborhood.
+
+
 
