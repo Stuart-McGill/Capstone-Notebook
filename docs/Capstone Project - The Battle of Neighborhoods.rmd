@@ -71,7 +71,7 @@ Given the neighborhood radius definitions, outlier Los Angeles neighborhoods wer
 htmltools::tags$iframe(title = "embedded map of LA Centroids", src = "./la_map_markers_js.html",width=1000, height=800)
 ```
 
-##### Map of New York City Neighborhood Centroids (outliers excluded)
+##### [Map of New York City Neighborhood Centroids (outliers excluded)](ny_map_markers_js.html)
 
 ```{r, echo=F}
 
