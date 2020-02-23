@@ -1,0 +1,52 @@
+---
+title: "Capstone Project - The Battle of Neighborhoods"
+author: "Stuart McGill"
+output: html_document
+---
+
+```{r, echo=FALSE, results='hide', eval=FALSE}
+library(checkpoint)
+checkpoint('2020-02-10')
+
+```
+
+
+### 1. Introduction
+
+#### 1.1 Business Problem: Searching for a New home in a New City
+
+According to the [US Census Bureau](https://www.census.gov/data/tables/time-series/demo/geographic-mobility/historic.html), every year approximately 32 Million Americans move home. Moving to a new city is a difficult undertaking and can result in a lot of stress. Especially when you like the facilities and venues in your current accommodation. There may be many different locations in a vast number of neighbourhoods to choose from. 
+
+Albert Einstein famously worked on three rules, ["Out of clutter, find simplicity. From discord, find harmony. In the middle of difficulty, lies opportunity."](http://www.bigear.org/vol1no4/wheeler.htm). The difficulty faced by the huge number of people moving home annually and real-estate and rental industries make up the target audience of stakeholders who face this problem. Simplifying the search for new accommodation in a new city has real value for people moving home by reducing the cognitive load and accompanying stress. Having a way to contextualise real-estate / rental listings based on a users current location would give a real-estate company a competitive advantage. These reasons explain why people moving to a new city and real-estate / rental-listing companies care about simplifying the problem of search for a new home in an new city.
+
+#### 1.2 Solution: Contextualize the Unfamiliar City
+
+To make moving home easier, you need a reference point, where potential neighborhoods in the new city are compared to your current location. Imagine a real-estate / rental-listing website (such as [zillow](https://www.zillow.com/) or [realtor](https://www.realtor.com/) being able to contextualise the potential neighborhoods based on their similarity of surrounding facilities to your current accommodation. To do this, the user's current city's neighbourhoods would be clustered. These clusters would then be used as class labels, for training a classification algorithm. This classifier would then assign neighborhoods in the new city to be like neighbourhood clusters in the current city. This would provide the user with a common reference point to filter their options, reducing the cognitive demand of selecting a new home.
+
+As a proof of concept case study, Los Angeles (USA) is selected as the current city and New York City (USA) is selected as the moving location. Then a three-step process is applied with the aim to make unfamiliar New York understandable by relating the neighborhoods to Los Angeles:
+
+ 1. The neighborhoods of Los Angeles will be clustered based on their surrounding facilities.
+ 2. These clusters will be used as labels to train a classifier.
+ 3. The classifier will then be applied to New York City neighborhoods, providing context for the new city via analogy to the current residence.
+
+
+### 2. Data
+
+#### 2.1 Sources
+
+Neighborhood names and boundaries, as defined by the latitude, longitude coordinates of bounding polygons of the will be sourced from [Neighborhood Data for Social Change](https://usc.data.socrata.com/dataset/Los-Angeles-Neighborhood-Map/r8qd-yxsr) for Los Angeles and [New York Open Data](https://data.cityofnewyork.us/City-Government/Neighborhood-Tabulation-Areas-NTA-/cpf4-rkhq) for New York City. To simplify what venues are considered to be within a neighbourhood, the [centroid of the bounding polygon](https://en.wikipedia.org/wiki/Centroid#Of_a_polygon) will be calculated. Venues will be considered as part of the neighbourhood if they fall within 1000 metre radius of the centroid of each neighborhood polygon (see data exploration for update).
+
+The types of venues (categories) of the surrounding businesses and facilities in each neighbourhood will be sourced from the [Foursquare Places API](https://developer.foursquare.com/docs/api). The venue categories might not be distinct, for example cafes, coffee houses, and coffee bars should probably be considered the same type of venue. So the venue categories will be clustered based on their semantic meaning using a natural-language-processing word-embedding distance metric. 
+
+Each category cluster will form a feature dimension for clustering and classification. For each neighborhood, the number of venues in each category cluster will be counted. Then each category cluster count will be divided by the total neighborhood venues. So, the features of each neighborhood are the venue category clusters as a proportion of the total venues within the neighborhood. 
+
+The neighborhood proportion-venue vector, that sums to one, can be considered to fall with in a [simplex](https://en.wikipedia.org/wiki/Simplex). A simplex can be considered to be a generalization of the idea of a triangle to any number of dimensions. The neighborhood features fall within the space defined by the simplex. This complicates comparing neighborhoods because their feature vectors are not well described by Euclidean metrics as their space is non-Euclidean. Therefore, the [Hilbert simplex distance](https://arxiv.org/pdf/1704.00454.pdf) will be used as an appropriate distance metric for this data.
+
+
+#### 2.2 Getting the data
+
+```{r, echo=F}
+
+htmltools::tags$iframe(title = "My embedded document", src = "la_map.html", width=1000,height=900)
+```
+
