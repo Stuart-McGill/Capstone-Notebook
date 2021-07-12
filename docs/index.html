@@ -3,9 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>"Capstone Project for IBM Data Science Certificate"</title>
-    <div>
-        <iframe src="./Capstone-Project---The-Battle-of-Neighborhoods.html" frameborder="0" style="overflow:hidden;height:100%;width:100%" height="100%" width="100%">></iframe>
-    </div>
+    
+    <iframe src="./Capstone-Project---The-Battle-of-Neighborhoods.html" id="child-iframe" frameborder="0" ></iframe>
+
+    <script>
+        let iframe = document.querySelector("#child-iframe");
+
+        iframe.addEventListener('load', function() {
+            iframe.style.height = iframe.contentDocument.body.scrollHeight + 'px';
+            iframe.style.width = iframe.contentDocument.body.scrollWidth + 'px';
+        });	
+    </script>
+
 </head>
 <body>
 
